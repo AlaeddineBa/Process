@@ -1,0 +1,78 @@
+<div layout="column" class="zone-saisie">
+    <md-input-container>
+        <label>Login</label>
+        <input ng-model="vm.user.email" label="email" id="email" type="email">
+    </md-input-container>
+    <md-input-container>
+        <label>Password</label>
+        <input ng-model="vm.user.password" label="password" id="password" type="password">
+    </md-input-container>
+    <md-button ng-click="vm.login()" class="md-primary md-raised">Login</md-button>
+</div>
+<div layout="row">
+    <md-button ng-click="vm.addExpenses()" class="md-primary md-raised">Ajouter Charge</md-button>
+    <md-button ng-click="vm.addClient()" class="md-primary md-raised">Ajouter Client</md-button>
+    <md-button ng-click="vm.stats()" class="md-primary md-raised">Stats</md-button>
+</div>
+<span>Par requete HTTP POST</span>
+<div layout="row">
+    <md-button ng-click="vm.addInvoicePost()" class="md-primary md-raised">Ajouter Facture</md-button>
+    <md-button ng-click="vm.numberPost()" class="md-primary md-raised">Number</md-button>
+</div>
+<div layout="row">
+    <md-section class="widthSection">
+        <md-list>
+            <md-list-item class="md-2-line"
+                          ng-repeat="client in vm.clients">
+
+                <div class="md-list-item-text" layout="column">
+                    <h3>{{ client.first_name }} {{ client.last_name }}</h3>
+                </div>
+                <div class="md-secondary">
+                    <md-button ng-click="vm.addDevis(client._id)" class="md-primary md-raised">DEVIS</md-button>
+                    <md-button ng-click="vm.addInvoice(client._id)" class="md-primary md-raised">Facture</md-button>
+                </div>
+                <md-divider></md-divider>
+            </md-list-item>
+
+        </md-list>
+    </md-section>
+    <md-divider></md-divider>
+    <md-section class="widthSection">
+        <md-list>
+            <md-list-item class="md-1-line"
+                          ng-repeat="invoice in vm.invoices">
+
+                <div class="md-list-item-text" layout="column">
+                    <h4> {{ invoice.amount}} {{ invoice.done}}</h4>
+                    <h4> {{ invoice.client.last_name}}</h4>
+                </div>
+                <div class="md-secondary">
+                    <md-button ng-click="vm.addReglements(invoice._id)" class="md-primary md-raised">A</md-button>
+                </div>
+                <md-divider></md-divider>
+            </md-list-item>
+
+        </md-list>
+    </md-section>
+    <md-divider></md-divider>
+    <md-section class="widthSection">
+        <md-list>
+            <md-list-item class="md-2-line"
+                          ng-repeat="estimate in vm.estimates">
+
+                <div class="md-list-item-text" layout="column">
+                    <h3>{{ estimate.label }}</h3>
+                    <h4> {{ estimate.client.last_name}}</h4>
+                </div>
+                <div class="md-secondary">
+                    <md-button ng-click="vm.transfertInvoice(estimate)" class="md-primary md-raised">T</md-button>
+                    <md-button ng-click="vm.addDeposit(estimate._id)" class="md-primary md-raised">A</md-button>
+                </div>
+                <md-divider></md-divider>
+            </md-list-item>
+
+        </md-list>
+    </md-section>
+</div>
+
